@@ -77,8 +77,6 @@ func traverseDomain(domain string, depth int) {
 	cert := conn.ConnectionState().PeerCertificates[0]
 	dnsNames := extractUniqueDNSNames(cert)
 
-	numDNSNames := len(dnsNames)
-	yellowPrintf("🔍 Traversing %s: %d domains found\n", domain, numDNSNames)
 	printDNSNames(dnsNames)
 
 	if depth > 1 {
@@ -117,9 +115,4 @@ func extractUniqueDNSNames(cert *x509.Certificate) []string {
 	}
 
 	return dnsNames
-}
-
-func yellowPrintf(format string, a ...interface{}) {
-	yellow := "\033[33m%s\033[0m"
-	fmt.Printf(yellow, fmt.Sprintf(format, a...))
 }
